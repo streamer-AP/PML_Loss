@@ -13,7 +13,7 @@ from torch.utils.data.distributed import DistributedSampler
 from torch.utils.tensorboard import SummaryWriter
 
 from datasets import build_dataset
-from eingine.bl_trainer import evaluate_counting, train_one_epoch
+from eingine.trainer import evaluate_counting, train_one_epoch
 from misc import utils
 from misc.drawer import Drawer_DenseMap
 from misc.saver_builder import Saver
