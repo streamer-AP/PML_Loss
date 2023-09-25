@@ -10,7 +10,7 @@ import torch
 from .utils import (SmoothedValue, get_total_grad_norm, is_main_process,
                     reduce_dict)
 
-def train_one_epoch(model: torch.nn.Module, counting_criterion: torch.nn.Module, locater_criterion: torch.nn.Module, data_loader: Iterable, optimizer: torch.optim.Optimizer, metric_logger: object, drawer: object, loss_weight: object, epoch, args):
+def train_one_epoch(model: torch.nn.Module, counting_criterion: torch.nn.Module, data_loader: Iterable, optimizer: torch.optim.Optimizer, metric_logger: object, drawer: object, loss_weight: object, epoch, args):
     model.train()
     counting_criterion.train()
     header = 'Epoch: [{}]'.format(epoch)
@@ -28,7 +28,7 @@ def train_one_epoch(model: torch.nn.Module, counting_criterion: torch.nn.Module,
             aux_counting_loss, aux_dMaps = counting_criterion(
                 dmap, labels, aux_scale)
             for key, value in aux_counting_loss.items():
-                loss_dict[f"aux_counting_{j}_{key}"] = value
+                loss_dict[f"{j}_{key}"] = value
             all_loss += aux_counting_loss["all"]
         loss_dict["all"] = all_loss
 
@@ -57,10 +57,9 @@ def train_one_epoch(model: torch.nn.Module, counting_criterion: torch.nn.Module,
 
 
 @torch.no_grad()
-def evaluate_counting(model, counting_criterion, locating_criterion, data_loader, metric_logger, drawer, epoch, args):
+def evaluate_counting(model, counting_criterion,  data_loader, metric_logger, drawer, epoch, args):
     model.eval()
     counting_criterion.eval()
-    locating_criterion.eval()
     header = "Test"
     metric_logger.set_header(header)
     model.only_dmap = True

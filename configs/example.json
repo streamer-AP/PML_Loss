@@ -4,12 +4,12 @@
     },
     "Dataset": {
         "train": {
-            "name": "nwpu_crowd",
+            "name": "st_crowd",
             "type": "train",
             "task": "counting",
-            "ann_file": ".data/jhu_crowd_v2.0/train_annotation.json",
-            "img_prefix": ".data/jhu_crowd_v2.0/train/images",
-            "file_list": ".data/jhu_crowd_v2.0/train/image_labels.txt",
+            "ann_file": "/home/asd/lxyworkspace/Cascade_Loss/data/part_A_final/train_data_annotation.json",
+            "img_prefix": "/home/asd/lxyworkspace/Cascade_Loss/data/part_A_final/train_data/images",
+            "file_list": "",
             "size": 1024,
             "img_norm_cfg": {
                 "mean": [
@@ -24,7 +24,7 @@
                 ]
             },
             "size_divisor": 32,
-            "batch_size": 4,
+            "batch_size": 8,
             "num_workers": 16,
             "shuffle": true,
             "drop_last": true,
@@ -32,12 +32,12 @@
             "max_len": 30000
         },
         "val": {
-            "name": "nwpu_crowd",
+            "name": "st_crowd",
             "type": "val",
             "task": "counting",
-            "ann_file": ".data/jhu_crowd_v2.0/val_annotation.json",
-            "img_prefix": ".data/jhu_crowd_v2.0/val/images",
-            "file_list": ".data/jhu_crowd_v2.0/val/image_labels.txt",
+            "ann_file": "/home/asd/lxyworkspace/Cascade_Loss/data/part_A_final/test_data_annotation.json",
+            "img_prefix": "/home/asd/lxyworkspace/Cascade_Loss/data/part_A_final/test_data/images",
+            "file_list": "",
             "size": 1024,
             "img_norm_cfg": {
                 "mean": [
@@ -64,9 +64,9 @@
             "task": "counting",
 
             "type": "test",
-            "ann_file": ".data/jhu_crowd_v2.0/test_annotation.json",
-            "file_list": ".data/jhu_crowd_v2.0/test/image_labels.txt",
-            "img_prefix": ".data/jhu_crowd_v2.0/test/images",
+            "ann_file": "",
+            "file_list": "",
+            "img_prefix": "",
             "size": 1024,
             "img_norm_cfg": {
                 "mean": [

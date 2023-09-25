@@ -71,7 +71,6 @@ def main(args):
         ema_scheduler = None
     loss_weight = loss_weight_builder(args.Loss_Weight)
     counting_criterion = build_loss(args.Loss.counting)
-    locating_criterion = build_loss(args.Loss.locating)
     saver = Saver(args.Saver)
     drawer = Drawer_DenseMap(args.Drawer)
     if args.Misc.use_tensorboard:
@@ -85,13 +84,13 @@ def main(args):
         stats = edict()
         drawer.clear()
         stats.train_stats = train_one_epoch(
-            model, counting_criterion,locating_criterion, loader_train, optimizer, train_logger, drawer, loss_weight, epoch, args)
+            model, counting_criterion,loader_train, optimizer, train_logger, drawer, loss_weight, epoch, args)
         if args.Scheduler.ema and epoch > args.Scheduler.ema_start_epoch:
             ema_model.update_parameters(model)
             ema_scheduler.step()
             torch.optim.swa_utils.update_bn(loader_train, ema_model)
             stats.ema_test_stats = evaluate_counting(
-                ema_model, counting_criterion,locating_criterion, loader_val, val_logger, ema_drawer, epoch, args)
+                ema_model, counting_criterion, loader_val, val_logger, ema_drawer, epoch, args)
             ema_saver.save_on_master(
                 ema_model, optimizer, scheduler, epoch, stats)
         else:
@@ -100,7 +99,7 @@ def main(args):
             stats.ema_test_stats = {}
         drawer.clear()
         stats.test_stats = evaluate_counting(
-            model, counting_criterion,locating_criterion, loader_val, val_logger, drawer, epoch, args)
+            model, counting_criterion, loader_val, val_logger, drawer, epoch, args)
         saver.save_on_master(model, optimizer, scheduler, epoch, stats)
         log_stats = {**{f'train_{k}': v for k, v in stats.train_stats.items()},
                      **{f'val_{k}': v for k, v in stats.test_stats.items()},
