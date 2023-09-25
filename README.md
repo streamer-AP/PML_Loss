@@ -1,6 +1,6 @@
 # PML Loss
 
-## Paper
+# Paper
 
 This is an official code for our paper: Progressive Multi-resolution Loss for Crowd Counting. 
 
@@ -13,8 +13,43 @@ We find that the traditional single-resolution L2 loss is a particular case of o
 We mathematically prove it is superior to a single-resolution L2 loss.
 Without bells and whistles, the proposed loss substantially improves several baselines and performs favorably compared to state-of-the-art methods on five crowd counting datasets: NWPU-Crowd, ShanghaiTech A \& B, UCF-QNRF, and JHU-Crowd++.
 
-## Requirements
+# Prerequisites
 
-Put the data in the datasets fold.
+Python >=3.8
 
-This code have been tested on python > 3.8 and pytorch > 2.0, training scripts can be found in scripts:
+Pytorch >= 2.0
+
+For other libraries, check requirements.txt.
+
+
+# Getting Started
+## Dataset download
+
++ UCF-QNRF can be downloaded [here](https://www.crcv.ucf.edu/data/ucf-qnrf/)
+
++ NWPU-Crowd can be downloaded [here](https://www.crowdbenchmark.com/nwpucrowd.html)
+
++ JHU-Crowd++ can be downloaded [here](http://www.crowd-counting.com/)
+
++ Shanghai Tech Part A and Part B can be downloaded [here](https://www.kaggle.com/tthien/shanghaitech)
+
+## Data preprocess
+
+Convert all dataset annotations to COCO format.
+
++ Run ```./datasets/nwpu2coco.py ``` to generate annotations for the NWPU-Crowd and JHU-Crowd++.
+
++ Run ```./datasets/st2coco.py ``` to generate annotations for the Shanghai Tech Part A and Part B.
+
++ Run ```./datasets/ucf2coco.py ``` to generate annotations for UCF-QNRF.
+
++ Modify  ```./configs/example.json ``` with your dataset paths and COCO format annotation paths.
+
+## Training 
+
++ run ```python train_csr.py```.
+
+## Pre-trained Models
+
+We provide the pre-trained models in this [link]().
+
